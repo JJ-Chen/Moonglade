@@ -23,8 +23,6 @@ public class ExportPostDataCommandHandler : IRequestHandler<ExportPostDataComman
             p.PostContent,
             p.CreateTimeUtc,
             p.CommentEnabled,
-            p.PostExtension.Hits,
-            p.PostExtension.Likes,
             p.PubDateUtc,
             p.ContentLanguageCode,
             p.IsDeleted,

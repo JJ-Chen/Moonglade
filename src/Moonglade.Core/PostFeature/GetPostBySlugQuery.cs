@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
-using Moonglade.Caching;
+﻿using Edi.CacheAside.InMemory;
+using Microsoft.Extensions.Configuration;
 using Moonglade.Data.Spec;
 using Moonglade.Utils;
 
@@ -10,10 +10,10 @@ public record GetPostBySlugQuery(PostSlug Slug) : IRequest<Post>;
 public class GetPostBySlugQueryHandler : IRequestHandler<GetPostBySlugQuery, Post>
 {
     private readonly IRepository<PostEntity> _repo;
-    private readonly IBlogCache _cache;
+    private readonly ICacheAside _cache;
     private readonly IConfiguration _configuration;
 
-    public GetPostBySlugQueryHandler(IRepository<PostEntity> repo, IBlogCache cache, IConfiguration configuration)
+    public GetPostBySlugQueryHandler(IRepository<PostEntity> repo, ICacheAside cache, IConfiguration configuration)
     {
         _repo = repo;
         _cache = cache;
@@ -44,7 +44,7 @@ public class GetPostBySlugQueryHandler : IRequestHandler<GetPostBySlugQuery, Pos
             await _repo.UpdateAsync(p, ct);
         }
 
-        var psm = await _cache.GetOrCreateAsync(CacheDivision.Post, $"{pid}", async entry =>
+        var psm = await _cache.GetOrCreateAsync(BlogCachePartition.Post.ToString(), $"{pid}", async entry =>
         {
             entry.SlidingExpiration = TimeSpan.FromMinutes(int.Parse(_configuration["CacheSlidingExpirationMinutes:Post"]!));
 

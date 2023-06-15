@@ -38,7 +38,7 @@
 }
 
 ::selection {
-    background-color: var(--bs-primary);
+    background-color: var(--accent-color1);
     color: var(--bs-white);
     text-shadow: none;
 }
@@ -280,8 +280,8 @@ h5 {
 
 .blogger-head-pic {
     border: 5px solid var(--transparent-light-50);
-    height: 110px;
-    width: 110px;
+    height: 120px;
+    width: 120px;
 }
 
 .blog-info-photo-text {

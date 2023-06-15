@@ -1,4 +1,4 @@
-﻿using Moonglade.Caching;
+﻿using Edi.CacheAside.InMemory;
 
 namespace Moonglade.Core.PostFeature;
 
@@ -7,9 +7,9 @@ public record DeletePostCommand(Guid Id, bool SoftDelete = false) : IRequest;
 public class DeletePostCommandHandler : IRequestHandler<DeletePostCommand>
 {
     private readonly IRepository<PostEntity> _repo;
-    private readonly IBlogCache _cache;
+    private readonly ICacheAside _cache;
 
-    public DeletePostCommandHandler(IRepository<PostEntity> repo, IBlogCache cache)
+    public DeletePostCommandHandler(IRepository<PostEntity> repo, ICacheAside cache)
     {
         _repo = repo;
         _cache = cache;
@@ -31,6 +31,6 @@ public class DeletePostCommandHandler : IRequestHandler<DeletePostCommand>
             await _repo.DeleteAsync(post, ct);
         }
 
-        _cache.Remove(CacheDivision.Post, guid.ToString());
+        _cache.Remove(BlogCachePartition.Post.ToString(), guid.ToString());
     }
 }

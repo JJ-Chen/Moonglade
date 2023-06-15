@@ -1,5 +1,4 @@
-﻿using Moonglade.Caching.Filters;
-using Moonglade.Core.PageFeature;
+﻿using Moonglade.Core.PageFeature;
 using Moonglade.Web.Attributes;
 using NUglify;
 
@@ -10,11 +9,11 @@ namespace Moonglade.Web.Controllers;
 [Route("api/[controller]")]
 public class PageController : Controller
 {
-    private readonly IBlogCache _cache;
+    private readonly ICacheAside _cache;
     private readonly IMediator _mediator;
 
     public PageController(
-        IBlogCache cache,
+        ICacheAside cache,
         IMediator mediator)
     {
         _cache = cache;
@@ -50,7 +49,7 @@ public class PageController : Controller
 
         var uid = await pageServiceAction(model);
 
-        _cache.Remove(CacheDivision.Page, model.Slug.ToLower());
+        _cache.Remove(BlogCachePartition.Page.ToString(), model.Slug.ToLower());
         return Ok(new { PageId = uid });
     }
 
@@ -63,7 +62,7 @@ public class PageController : Controller
 
         await _mediator.Send(new DeletePageCommand(id));
 
-        _cache.Remove(CacheDivision.Page, page.Slug);
+        _cache.Remove(BlogCachePartition.Page.ToString(), page.Slug);
         return NoContent();
     }
 }

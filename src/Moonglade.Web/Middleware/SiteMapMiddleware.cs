@@ -15,13 +15,13 @@ public class SiteMapMiddleware
     public async Task Invoke(
         HttpContext httpContext,
         IBlogConfig blogConfig,
-        IBlogCache cache,
+        ICacheAside cache,
         IRepository<PostEntity> postRepo,
         IRepository<PageEntity> pageRepo)
     {
         if (blogConfig.AdvancedSettings.EnableSiteMap && httpContext.Request.Path == "/sitemap.xml")
         {
-            var xml = await cache.GetOrCreateAsync(CacheDivision.General, "sitemap", async _ =>
+            var xml = await cache.GetOrCreateAsync(BlogCachePartition.General.ToString(), "sitemap", async _ =>
             {
                 var url = Helper.ResolveRootUrl(httpContext, blogConfig.GeneralSettings.CanonicalPrefix, true, true);
                 var data = await GetSiteMapData(url, postRepo, pageRepo);

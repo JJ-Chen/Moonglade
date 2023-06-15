@@ -9,7 +9,7 @@ public class CategoryListModel : PageModel
 {
     private readonly IMediator _mediator;
     private readonly IBlogConfig _blogConfig;
-    private readonly IBlogCache _cache;
+    private readonly ICacheAside _cache;
 
     [BindProperty(SupportsGet = true)]
     public int P { get; set; }
@@ -19,7 +19,7 @@ public class CategoryListModel : PageModel
     public CategoryListModel(
         IBlogConfig blogConfig,
         IMediator mediator,
-        IBlogCache cache)
+        ICacheAside cache)
     {
         _blogConfig = blogConfig;
         _mediator = mediator;
@@ -37,7 +37,7 @@ public class CategoryListModel : PageModel
 
         if (Cat is null) return NotFound();
 
-        var postCount = await _cache.GetOrCreateAsync(CacheDivision.PostCountCategory, Cat.Id.ToString(),
+        var postCount = await _cache.GetOrCreateAsync(BlogCachePartition.PostCountCategory.ToString(), Cat.Id.ToString(),
             _ => _mediator.Send(new CountPostQuery(CountType.Category, Cat.Id)));
 
         var postList = await _mediator.Send(new ListPostsQuery(pageSize, P, Cat.Id));

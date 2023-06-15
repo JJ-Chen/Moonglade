@@ -1,5 +1,6 @@
 ﻿using AspNetCoreRateLimit;
 using Edi.Captcha;
+using Edi.PasswordGenerator;
 using Microsoft.ApplicationInsights.Extensibility;
 using Microsoft.ApplicationInsights.Extensibility.Implementation;
 using Microsoft.AspNetCore.HttpOverrides;
@@ -128,11 +129,13 @@ void ConfigureServices(IServiceCollection services)
         options.AppendTrailingSlash = false;
     });
 
+    services.AddTransient<IPasswordGenerator, DefaultPasswordGenerator>();
+
     services.AddHealthChecks();
     services.AddPingback()
             .AddSyndication()
             .AddNotification()
-            .AddBlogCache()
+            .AddInMemoryCacheAside()
             .AddMetaWeblog<Moonglade.Web.MetaWeblogService>()
             .AddScoped<ValidateCaptcha>()
             .AddScoped<ITimeZoneResolver, BlogTimeZoneResolver>()

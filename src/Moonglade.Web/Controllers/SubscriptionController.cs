@@ -8,12 +8,12 @@ namespace Moonglade.Web.Controllers;
 public class SubscriptionController : ControllerBase
 {
     private readonly IBlogConfig _blogConfig;
-    private readonly IBlogCache _cache;
+    private readonly ICacheAside _cache;
     private readonly IMediator _mediator;
 
     public SubscriptionController(
         IBlogConfig blogConfig,
-        IBlogCache cache,
+        ICacheAside cache,
         IMediator mediator)
     {
         _blogConfig = blogConfig;
@@ -51,7 +51,7 @@ public class SubscriptionController : ControllerBase
         var route = hasRoute ? routeName.ToLower().Trim() : null;
 
         return await _cache.GetOrCreateAsync(
-            hasRoute ? CacheDivision.PostCountCategory : CacheDivision.General, route ?? "rss", async entry =>
+            hasRoute ? BlogCachePartition.PostCountCategory.ToString() : BlogCachePartition.General.ToString(), route ?? "rss", async entry =>
             {
                 entry.SlidingExpiration = TimeSpan.FromHours(1);
 
@@ -68,7 +68,7 @@ public class SubscriptionController : ControllerBase
     [HttpGet("atom")]
     public async Task<IActionResult> Atom()
     {
-        return await _cache.GetOrCreateAsync(CacheDivision.General, "atom", async entry =>
+        return await _cache.GetOrCreateAsync(BlogCachePartition.General.ToString(), "atom", async entry =>
         {
             entry.SlidingExpiration = TimeSpan.FromHours(1);
 

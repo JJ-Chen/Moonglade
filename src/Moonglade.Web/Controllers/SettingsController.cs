@@ -1,5 +1,5 @@
-﻿using Microsoft.AspNetCore.Localization;
-using Moonglade.Caching.Filters;
+﻿using Edi.PasswordGenerator;
+using Microsoft.AspNetCore.Localization;
 using Moonglade.Notification.Client;
 using NUglify;
 
@@ -55,7 +55,7 @@ public class SettingsController : ControllerBase
 
     [HttpPost("general")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
-    [TypeFilter(typeof(ClearBlogCache), Arguments = new object[] { CacheDivision.General, "theme" })]
+    [TypeFilter(typeof(ClearBlogCache), Arguments = new object[] { BlogCachePartition.General, "theme" })]
     public async Task<IActionResult> General(GeneralSettings model, ITimeZoneResolver timeZoneResolver)
     {
         model.AvatarUrl = _blogConfig.GeneralSettings.AvatarUrl;
@@ -250,9 +250,9 @@ public class SettingsController : ControllerBase
 
     [HttpGet("password/generate")]
     [ProducesResponseType(StatusCodes.Status200OK)]
-    public IActionResult GeneratePassword()
+    public IActionResult GeneratePassword([FromServices] IPasswordGenerator passwordGenerator)
     {
-        var password = Helper.GeneratePassword(10, 3);
+        var password = passwordGenerator.GeneratePassword(new(10, 3));
         return Ok(new
         {
             ServerTimeUtc = DateTime.UtcNow,

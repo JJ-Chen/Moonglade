@@ -148,7 +148,12 @@
 }
 
 @section head{
-    <link href="~/lib/tagify/tagify.min.css" rel="stylesheet" />
+    <link href="~/lib/tagify/tagify.css" rel="stylesheet" />
+    <style>
+        .tagify {
+            width: 100% !important;
+        }
+    </style>
 }
 
 <div class="p-4">
@@ -156,7 +161,7 @@
     <form class="post-edit-form" asp-controller="Post" asp-action="CreateOrEdit">
         <input type="hidden" asp-for="ViewModel.PostId" />
         <input type="hidden" asp-for="ViewModel.IsPublished" />
-        <div class="row">
+        <div class="row g-2">
             <div class="col-md-9 col-xl-10">
                 <input type="text" asp-for="ViewModel.Title" class="form-control form-control-lg" placeholder="@SharedLocalizer["Title"]" required maxlength="128" />
                 <div class="mt-1">
@@ -211,10 +216,6 @@
             </div>
             <div class="col-md-3 col-xl-2">
                 <div class="card mb-3">
-                    <div class="card-header">
-                        <i class="bi-clipboard-check me-1"></i>
-                        @SharedLocalizer["Options"]
-                    </div>
                     <div class="card-body">
                         <div class="form-check form-switch mb-2">
                             <input type="checkbox" name="EnableComment" value="true" class="form-check-input" @(Model.ViewModel.EnableComment ? "checked" : null)>
@@ -227,6 +228,10 @@
                         <div class="form-check form-switch">
                             <input type="checkbox" name="FeedIncluded" value="true" class="form-check-input" @(Model.ViewModel.FeedIncluded ? "checked" : null)>
                             <label asp-for="ViewModel.FeedIncluded" class="form-check-label"></label>
+                        </div>
+                        <div class="form-check form-switch">
+                            <input type="checkbox" name="IsOutdated" value="true" class="form-check-input" @(Model.ViewModel.IsOutdated ? "checked" : null)>
+                            <label asp-for="ViewModel.IsOutdated" class="form-check-label"></label>
                         </div>
                     </div>
                     <div class="card-body border-top">

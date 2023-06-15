@@ -39,11 +39,6 @@ public class Seed
                 ContentLanguageCode = "en-us",
                 HashCheckSum = -1688639577,
                 IsOriginal = true,
-                PostExtension = new()
-                {
-                    Hits = 1024,
-                    Likes = 512
-                },
                 Tags = dbContext.Tag.ToList(),
                 PostCategory = dbContext.PostCategory.ToList()
             };

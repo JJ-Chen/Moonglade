@@ -1,5 +1,4 @@
-﻿using Moonglade.Caching.Filters;
-using Moonglade.Core.TagFeature;
+﻿using Moonglade.Core.TagFeature;
 using System.ComponentModel.DataAnnotations;
 
 namespace Moonglade.Web.Controllers;

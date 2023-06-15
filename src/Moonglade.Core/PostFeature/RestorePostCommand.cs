@@ -1,4 +1,4 @@
-﻿using Moonglade.Caching;
+﻿using Edi.CacheAside.InMemory;
 
 namespace Moonglade.Core.PostFeature;
 
@@ -7,9 +7,9 @@ public record RestorePostCommand(Guid Id) : IRequest;
 public class RestorePostCommandHandler : IRequestHandler<RestorePostCommand>
 {
     private readonly IRepository<PostEntity> _repo;
-    private readonly IBlogCache _cache;
+    private readonly ICacheAside _cache;
 
-    public RestorePostCommandHandler(IRepository<PostEntity> repo, IBlogCache cache)
+    public RestorePostCommandHandler(IRepository<PostEntity> repo, ICacheAside cache)
     {
         _repo = repo;
         _cache = cache;
@@ -23,6 +23,6 @@ public class RestorePostCommandHandler : IRequestHandler<RestorePostCommand>
         pp.IsDeleted = false;
         await _repo.UpdateAsync(pp, ct);
 
-        _cache.Remove(CacheDivision.Post, request.Id.ToString());
+        _cache.Remove(BlogCachePartition.Post.ToString(), request.Id.ToString());
     }
 }

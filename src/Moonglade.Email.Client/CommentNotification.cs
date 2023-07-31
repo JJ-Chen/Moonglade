@@ -2,7 +2,7 @@
 using Moonglade.Configuration;
 using Moonglade.Utils;
 
-namespace Moonglade.Notification.Client;
+namespace Moonglade.Email.Client;
 
 public record CommentNotification(
     string Username,
@@ -40,6 +40,6 @@ public class CommentNotificationHandler : INotificationHandler<CommentNotificati
         );
 
         var dl = new[] { _blogConfig.GeneralSettings.OwnerEmail };
-        await _blogNotification.EnqueueNotification(MailMesageTypes.NewCommentNotification, dl, payload);
+        await _blogNotification.Enqueue(MailMesageTypes.NewCommentNotification, dl, payload);
     }
 }

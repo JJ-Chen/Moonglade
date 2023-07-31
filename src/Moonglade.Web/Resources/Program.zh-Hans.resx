@@ -145,7 +145,7 @@
     <value>账号信息</value>
   </data>
   <data name="Accounts" xml:space="preserve">
-    <value>账户</value>
+    <value>账号</value>
   </data>
   <data name="Action" xml:space="preserve">
     <value>操作</value>
@@ -241,7 +241,7 @@
     <value>分类信息</value>
   </data>
   <data name="Change" xml:space="preserve">
-    <value>修改</value>
+    <value>更改</value>
   </data>
   <data name="Change Avatar" xml:space="preserve">
     <value>更换头像</value>
@@ -396,11 +396,8 @@
   <data name="Enable FOAF" xml:space="preserve">
     <value>启用 FOAF</value>
   </data>
-  <data name="Enable Pingback receive" xml:space="preserve">
-    <value>启用 Pingback 接受</value>
-  </data>
-  <data name="Enable Pingback send" xml:space="preserve">
-    <value>启用 Pingback 发送</value>
+  <data name="Enable Pingback" xml:space="preserve">
+    <value>启用 Pingback</value>
   </data>
   <data name="Enable Site Map" xml:space="preserve">
     <value>启用网站地图</value>
@@ -720,9 +717,6 @@
   <data name="Set a primary domain if your website binds to multiple domian names." xml:space="preserve">
     <value>若您的网站绑定了多个域名，请填写主域名</value>
   </data>
-  <data name="Short description" xml:space="preserve">
-    <value>博主简介(短)</value>
-  </data>
   <data name="Show Admin login button under sidebar" xml:space="preserve">
     <value>在侧边栏下显示管理员登录按钮</value>
   </data>
@@ -890,5 +884,8 @@
   </data>
   <data name="Export" xml:space="preserve">
     <value>导出</value>
+  </data>
+  <data name="lower case English letters (a-z) and numbers (0-9) with/out hyphen (-) in middle." xml:space="preserve">
+    <value>小写英文字母（a-z）和数字（0-9），可以带或不带连符（-）</value>
   </data>
 </root>

@@ -3,11 +3,11 @@ using Moonglade.Configuration;
 
 namespace Moonglade.Comments.Moderators;
 
-public class LocalWordFilterModerator : ICommentModerator
+public class LocalModerator : ICommentModerator
 {
     private readonly IMaskWordFilter _filter;
 
-    public LocalWordFilterModerator(IBlogConfig blogConfig)
+    public LocalModerator(IBlogConfig blogConfig)
     {
         var sw = new StringWordSource(blogConfig.ContentSettings.DisharmonyWords);
         _filter = new MaskWordFilter(sw);

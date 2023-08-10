@@ -7,6 +7,9 @@ public class ContentSettings : IBlogSettings
 {
     [Display(Name = "Comment provider")]
     public CommentProvider CommentProvider { get; set; }
+    
+    [Display(Name = "Comments display order")]
+    public CommentOrder CommentOrder { get; set; }
 
     [Display(Name = "Post title alignment")]
     public PostTitleAlignment PostTitleAlignment { get; set; } = PostTitleAlignment.Left;
@@ -20,6 +23,10 @@ public class ContentSettings : IBlogSettings
 
     [Display(Name = "Comments require review and approval")]
     public bool RequireCommentReview { get; set; }
+
+    [Display(Name = "Automatically close comments on posts older than x days")]
+    [Range(0, 65536)]
+    public int CloseCommentAfterDays { get; set; }
 
     [DataType(DataType.MultilineText)]
     [Display(Name = "Blocked words")]
@@ -89,6 +96,12 @@ public enum CommentProvider
 {
     BuiltIn = 0,
     ThirdParty = 1
+}
+
+public enum CommentOrder
+{
+    OldToNew = 0,
+    NewToOld = 1
 }
 
 public enum PostTitleAlignment

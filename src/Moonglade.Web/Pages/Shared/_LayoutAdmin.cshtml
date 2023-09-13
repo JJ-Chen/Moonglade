@@ -30,7 +30,7 @@
     <script src="~/js/3rd/jquery.slim.min.js" asp-append-version="true"></script>
 </head>
 
-<body class="admin-body bg-gray-1">
+<body class="admin-body">
     <nav class="admin-navbar navbar sticky-top navbar-expand-lg navbar-dark bg-accent2">
         <a class="navbar-brand font-sairas" asp-page="/Admin/Post">
             @BlogConfig.GeneralSettings.SiteTitle
@@ -73,7 +73,7 @@
     </nav>
     <div class="d-flex admin-body-wrapper">
         <aside class="admin-nav">
-            <section class="admin-nav-section rounded-3 shadow-sm border bg-white mt-4 mb-3">
+            <section class="admin-nav-section mt-3 mb-3">
                 <div class="list-group list-group-flush">
                     <a asp-page="/Admin/Post"
                        class="list-group-item list-group-item-action @(currentPage is "/Admin/Post" or "/Admin/EditPost" or "/Admin/Draft" or "/Admin/RecycleBin" ? "active" : null)" title="Manage posts link">
@@ -103,15 +103,15 @@
                         <i class="bi-tag admin-nav-icon" title="Manage tags link"></i>
                         @SharedLocalizer["Tags"]
                     </a>
-                    <a asp-page="/Settings/CustomMenu"
-                       class="list-group-item list-group-item-action @(currentPage is "/Settings/CustomMenu" ? "active" : null)">
+                    <a asp-page="/Admin/Menu"
+                       class="list-group-item list-group-item-action @(currentPage is "/Admin/Menu" ? "active" : null)">
                         <i class="bi-menu-button-wide admin-nav-icon" title="Manage menus link"></i>
                         @SharedLocalizer["Menus"]
                     </a>
                     <a asp-page="/Admin/FriendLink"
                        class="list-group-item list-group-item-action @(currentPage is "/Admin/FriendLink" ? "active" : null)">
                         <i class="bi-link-45deg admin-nav-icon" title="Manage friend links"></i>
-                        @SharedLocalizer["Friend Links"]
+                        @SharedLocalizer["Friend links"]
                     </a>
                     <a asp-page="/Admin/Pingback"
                        class="list-group-item list-group-item-action @(currentPage is "/Admin/Pingback" ? "active" : null)">
@@ -129,8 +129,12 @@
                 </div>
             </section>
         </aside>
-        <div class="admin-main rounded-3 shadow-sm border bg-white mt-4 mb-4 me-3 ms-3">
-            @RenderBody()
+        <div class="admin-main mt-3 mb-3 me-3 ms-3">
+            @await RenderSectionAsync("admintoolbar", false)
+            
+            <div class="admin-main-body">
+                @RenderBody()
+            </div>
         </div>
     </div>
 

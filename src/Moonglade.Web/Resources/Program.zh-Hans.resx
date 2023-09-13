@@ -447,7 +447,7 @@
   <data name="Friend Link Options" xml:space="preserve">
     <value>友情链接选项</value>
   </data>
-  <data name="Friend Links" xml:space="preserve">
+  <data name="Friend links" xml:space="preserve">
     <value>友情链接</value>
   </data>
   <data name="General" xml:space="preserve">
@@ -479,9 +479,6 @@
   </data>
   <data name="Image" xml:space="preserve">
     <value>图片</value>
-  </data>
-  <data name="Inline CSS" xml:space="preserve">
-    <value>内联CSS</value>
   </data>
   <data name="Invalid Icon CSS Class" xml:space="preserve">
     <value>无效的图标CSS类名</value>
